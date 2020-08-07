@@ -144,7 +144,8 @@ def locations():
 
 @app.route('/search/<keyword>')
 def my_view_func(keyword):
-    
+    load()
+    limpiar()
     jobs =sqldf("select * from df where job_title like '%" + keyword + "%' or Location like '%" + keyword + "%' limit 5")
     jobs = jobs.to_json()
     return render_template('datos.html',datos =jobs)
