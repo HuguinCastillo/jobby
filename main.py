@@ -13,6 +13,7 @@ global df
 df=[]
 app = Flask(__name__)
 
+
 #app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:80085700@localhost:5432/jobby"
 #db = SQLAlchemy(app)
 
@@ -133,6 +134,8 @@ def hello():
 
 @app.route('/locations')
 def locations():
+    load()
+    limpiar()
     locations=sqldf("select distinct(Location) from df ")
     locations = locations.to_json()
     print(locations)
@@ -206,6 +209,5 @@ def load():
     print("Datos cargados")
 
 if __name__ == '__main__':
-    load()
-    limpiar()
+   
     app.run(port = 5000, debug = True)
